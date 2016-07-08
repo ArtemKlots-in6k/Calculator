@@ -16,11 +16,30 @@ public class Calculator {
         }
     }
 
+
+
+    private void checkForNegatives(String[] operandsArray) {
+        String negativeNumbers = "";
+        boolean isNegative = false;
+        for (String operand:operandsArray){
+            if (Integer.parseInt(operand) < 0) {
+                negativeNumbers += Integer.parseInt(operand) + " ";
+                isNegative = true;
+            }
+        }
+
+        if (isNegative){
+            throw new RuntimeException("Negatives not allowed. Wrong numbers: " + negativeNumbers);
+        }
+    }
+
+
     public int add(String mathExpression) {
         if (mathExpression.isEmpty())
             return 0;
 
         String[] operandsArray = prepareOperands(mathExpression);
+        checkForNegatives(operandsArray);
 
         for (String operand : operandsArray) {
             result += Integer.parseInt(operand);

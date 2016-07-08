@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -49,4 +50,21 @@ public class CalculatorTest {
     public void differentDelimitersWithCustomDelimiter() throws Exception {
         assertThat(calculator.add("//s\n1s2,3\n1"), is(7));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void addingWithNegativeNumbers() throws Exception {
+            calculator.add("1,-2");
+    }
+
+    @Test
+    public void addingWithNegativeNumbersAndCheckingMessage() throws Exception {
+        RuntimeException exception = null;
+        try {
+            calculator.add("1,-2,-3");
+        }catch (RuntimeException e){
+            exception = e;
+        }
+        assertThat(exception.getMessage(), is("Negatives not allowed. Wrong numbers: -2 -3 "));
+    }
+
 }
