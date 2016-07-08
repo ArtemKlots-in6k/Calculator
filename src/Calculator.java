@@ -6,29 +6,28 @@ public class Calculator {
     private int result;
     private String delimiters = ",|\n";
 
-    private String[] prepareOperands(String mathExpression){
+    private String[] prepareOperands(String mathExpression) {
         if (mathExpression.startsWith("//")) {
-            mathExpression = mathExpression.substring(DELIMITER_INDEX+1); // delete "//"
+            mathExpression = mathExpression.substring(DELIMITER_INDEX + 1); // delete "//"
             delimiters += "|" + String.valueOf(mathExpression.charAt(DELIMITER_INDEX));
-            return mathExpression.substring(mathExpression.indexOf("\n")+1).split(delimiters);
-        }else {
+            return mathExpression.substring(mathExpression.indexOf("\n") + 1).split(delimiters);
+        } else {
             return mathExpression.split(delimiters);
         }
     }
 
 
-
     private void checkForNegatives(String[] operandsArray) {
         String negativeNumbers = "";
         boolean isNegative = false;
-        for (String operand:operandsArray){
+        for (String operand : operandsArray) {
             if (Integer.parseInt(operand) < 0) {
                 negativeNumbers += Integer.parseInt(operand) + " ";
                 isNegative = true;
             }
         }
 
-        if (isNegative){
+        if (isNegative) {
             throw new RuntimeException("Negatives not allowed. Wrong numbers: " + negativeNumbers);
         }
     }
@@ -42,7 +41,8 @@ public class Calculator {
         checkForNegatives(operandsArray);
 
         for (String operand : operandsArray) {
-            result += Integer.parseInt(operand);
+            if (!(Integer.parseInt(operand) > 1000))
+                result += Integer.parseInt(operand);
         }
         return result;
     }

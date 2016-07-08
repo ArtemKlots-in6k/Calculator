@@ -67,4 +67,8 @@ public class CalculatorTest {
         assertThat(exception.getMessage(), is("Negatives not allowed. Wrong numbers: -2 -3 "));
     }
 
+    @Test
+    public void oneOperandMoreThanThouthand() throws Exception {
+        assertThat(calculator.add("2,1001"), is(2));
+    }
 }
