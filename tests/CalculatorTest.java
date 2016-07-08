@@ -39,4 +39,14 @@ public class CalculatorTest {
     public void addingWithTwoTypesOfDelimiters() throws Exception {
         assertThat(calculator.add("1\n2,3"),is(6));
     }
+
+    @Test
+    public void customDelimiter() throws Exception {
+        assertThat(calculator.add("//s\n1s2s3"),is(6));
+    }
+
+    @Test
+    public void differentDelimitersWithCustomDelimiter() throws Exception {
+        assertThat(calculator.add("//s\n1s2,3\n1"), is(7));
+    }
 }
