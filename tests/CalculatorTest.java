@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 /**
  * Created by employee on 7/8/16.
@@ -38,12 +39,12 @@ public class CalculatorTest {
 
     @Test
     public void addingWithTwoTypesOfDelimiters() throws Exception {
-        assertThat(calculator.add("1\n2,3"),is(6));
+        assertThat(calculator.add("1\n2,3"), is(6));
     }
 
     @Test
     public void customDelimiter() throws Exception {
-        assertThat(calculator.add("//s\n1s2s3"),is(6));
+        assertThat(calculator.add("//s\n1s2s3"), is(6));
     }
 
     @Test
@@ -53,18 +54,17 @@ public class CalculatorTest {
 
     @Test(expected = RuntimeException.class)
     public void addingWithNegativeNumbers() throws Exception {
-            calculator.add("1,-2");
+        calculator.add("1,-2");
     }
 
     @Test
     public void addingWithNegativeNumbersAndCheckingMessage() throws Exception {
-        RuntimeException exception = null;
         try {
             calculator.add("1,-2,-3");
-        }catch (RuntimeException e){
-            exception = e;
+            fail("Here expected exception");
+        } catch (RuntimeException e) {
+            assertThat(e.getMessage(), is("Negatives not allowed. Wrong numbers: -2 -3 "));
         }
-        assertThat(exception.getMessage(), is("Negatives not allowed. Wrong numbers: -2 -3 "));
     }
 
     @Test
