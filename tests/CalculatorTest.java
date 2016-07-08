@@ -34,4 +34,9 @@ public class CalculatorTest {
     public void fiveOperandsAdding() {
         assertThat(calculator.add("1,1,1,2,2,"), is(7));
     }
+
+    @Test
+    public void addingWithTwoTypesOfDelimiters() throws Exception {
+        assertThat(calculator.add("1\n2,3"),is(6));
+    }
 }

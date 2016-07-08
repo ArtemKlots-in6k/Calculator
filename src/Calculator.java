@@ -8,7 +8,7 @@ public class Calculator {
         if (mathExpression.isEmpty())
             return 0;
 
-        String[] operandsArray = mathExpression.split(",");
+        String[] operandsArray = mathExpression.split(",|\n");
         for (String operand : operandsArray) {
             result += Integer.parseInt(operand);
         }
